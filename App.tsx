@@ -25,7 +25,8 @@ const App = () => {
       return;
     }
 
-    const bmi = weightNum / (heightNum * heightNum);
+    const heightCM = heightNum / 100; // Convert height from cm to meters
+    const bmi = weightNum / (heightCM * heightCM); // Calculate BMI
     let classification = '';
 
     if (bmi < 18.5) {
@@ -38,20 +39,20 @@ const App = () => {
       classification = 'Obesity';
     }
 
-    setResult(`Your BMI is ${bmi.toFixed(2)} (${classification}).`);
+    setResult(`Your BMI at ${age}years is ${bmi.toFixed(2)} (${classification}).`);
   };
 
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.header}>BMI Calculator</Text>
       <View style={styles.inputContainer}>
-        <Text style={styles.label}>Age:</Text>
+        <Text style={styles.label}>Age (Years):</Text>
         <TextInput
           style={styles.input}
           keyboardType="numeric"
           value={age}
           onChangeText={setAge}
-          placeholder="Enter Age"
+          placeholder="Enter Your Age"
         />
       </View>
       <View style={styles.inputContainer}>
@@ -61,27 +62,27 @@ const App = () => {
           keyboardType="numeric"
           value={weight}
           onChangeText={setWeight}
-          placeholder="Enter weight"
+          placeholder="Enter Your Weight!"
         />
       </View>
       <View style={styles.inputContainer}>
-        <Text style={styles.label}>Height (m):</Text>
+        <Text style={styles.label}>Height (cm):</Text>
         <TextInput
           style={styles.input}
           keyboardType="numeric"
           value={height}
           onChangeText={setHeight}
-          placeholder="Enter height"
+          placeholder="Enter Your Height!"
         />
       </View>
       <View style={styles.inputContainer}>
-        <Text style={styles.label}>Weight (kg):</Text>
+        <Text style={styles.label}>Sex:</Text>
         <TextInput
           style={styles.input}
-          keyboardType="numeric"
+          keyboardType="ascii-capable"
           value={sex}
           onChangeText={setSex}
-          placeholder="Select Sex"
+          placeholder="Male/Female"
         />
       </View>
       <TouchableOpacity style={styles.button} onPress={calculateBMI}>
